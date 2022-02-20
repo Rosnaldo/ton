@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common'
+import { BadRequestException, Controller, Get, Param } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
+import { isNull as _isNull } from 'lodash'
 import { IUser } from '../interface/user'
 import { UserFindOneRepository } from '../repository/find-one.repostiory'
 
@@ -10,6 +11,12 @@ export class UserFindOneController {
 
   @Get(':userId')
   async handle(@Param('userId') userId: string): Promise<IUser> {
-    return this.userFindOneRepository.execute({ _id: userId })
+    const user = await this.userFindOneRepository.execute({ _id: userId })
+
+    if (_isNull(user)) {
+      throw new BadRequestException('User not found')
+    }
+
+    return user
   }
 }
