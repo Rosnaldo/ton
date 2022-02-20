@@ -17,7 +17,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config ./src/test/jest-e2e.json",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -72,6 +72,7 @@
     "run-script-webpack-plugin": "0.0.11",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.6",
+    "timekeeper": "^2.2.0",
     "ts-jest": "^27.0.7",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.3.0",
