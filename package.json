@@ -106,6 +106,6 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
-    "collectCoverage": true
+    "collectCoverage": false
   }
 }
