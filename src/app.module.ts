@@ -6,6 +6,7 @@ import { ThrottlerModule } from '@nestjs/throttler'
 
 import databaseConfig from './config/database.config'
 import local from './config/local.config'
+import all from './config/all.config'
 import mongoUriBuilder from './util/mongoUriBuilder'
 import { UserModule } from './module/user/user.module'
 import { AccessCountModule } from './module/access-count/access-count.module'
@@ -15,7 +16,7 @@ import { AccessCountModule } from './module/access-count/access-count.module'
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      load: [databaseConfig, local],
+      load: [databaseConfig, local, all],
     }),
     LoggerModule.forRoot(),
     ThrottlerModule.forRootAsync({
