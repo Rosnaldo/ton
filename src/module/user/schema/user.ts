@@ -1,10 +1,25 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { IUser } from '../interface/user'
 
-@Schema()
+@Schema({
+  timestamps: {
+    createdAt: 'created',
+    updatedAt: 'updated',
+  },
+  collection: 'users',
+})
 export class User implements IUser {
-  @Prop({ type: String, required: false })
-  name: string
+  @Prop({ type: String, required: true })
+  firstName: string
+
+  @Prop({ type: String, required: true })
+  lastName: string
+
+  @Prop({ type: String, required: true })
+  email: string
+
+  @Prop({ type: String, required: true })
+  password: string
 }
 
 export type UserDocument = User & Document
