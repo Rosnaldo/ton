@@ -1,15 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { Logger } from '@nestjs/common'
+import { BadRequestException, Logger } from '@nestjs/common'
 import { UserFindOneController } from '../find-one.controller'
 import { UserFindOneRepository } from '../../repository/find-one.repostiory'
+import { IUser } from '../../interface/user'
+import { MakeMockUser } from '../../mock/user'
 
 let controller
 const mockUserFindOneRepository = {
   execute: jest.fn(),
 }
 
-const Sut = () => {
-  const spy = jest.spyOn(mockUserFindOneRepository, 'execute')
+const Sut = (user: IUser) => {
+  const spy = jest.spyOn(mockUserFindOneRepository, 'execute').mockResolvedValue(user)
   return { spy }
 }
 
@@ -36,9 +38,15 @@ describe('UserFindOneController', () => {
   })
 
   it('Should call UserFindOneRepository with right param', async function () {
-    const { spy } = Sut()
+    const { spy } = Sut(MakeMockUser())
     const userId = '5ce1d6bb8fef73750f97e941'
     await controller.handle(userId)
     expect(spy).toBeCalledWith({ _id: userId })
+  })
+
+  it('When user not found should throw', async function () {
+    Sut(null)
+    const promise = controller.handle()
+    expect(promise).rejects.toThrowError(BadRequestException)
   })
 })
