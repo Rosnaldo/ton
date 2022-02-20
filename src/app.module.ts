@@ -30,7 +30,7 @@ import { AccessCountModule } from './module/access-count/access-count.module'
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        uri: mongoUriBuilder(configService.get('database')),
+        uri: configService.get('database').uri,
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
