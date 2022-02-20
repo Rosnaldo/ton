@@ -8,6 +8,7 @@ import databaseConfig from './config/database.config'
 import local from './config/local.config'
 import mongoUriBuilder from './util/mongoUriBuilder'
 import { UserModule } from './module/user/user.module'
+import { AccessCountModule } from './module/access-count/access-count.module'
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { UserModule } from './module/user/user.module'
       inject: [ConfigService],
     }),
     UserModule,
+    AccessCountModule,
   ],
   controllers: [],
   providers: [],
