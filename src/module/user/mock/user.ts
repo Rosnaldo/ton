@@ -8,5 +8,5 @@ export const MakeMockUser = (): IUser => ({
   firstName: 'Andrey',
   lastName: 'Tsuzuki',
   email: 'andreytsuzuzki@gmail.com',
-  password: 'Gtdneug',
+  password: 'Gtdneug32',
 })
