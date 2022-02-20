@@ -4,7 +4,7 @@ import { CountApiGetVisitsService } from '../service/count-api'
 
 @ApiTags('access-acount')
 @Controller('access-acount')
-export class AccessCountIncrementController {
+export class AccessCountGetVisitsController {
   constructor(private readonly countApiGetVisitsService: CountApiGetVisitsService) {}
   @Get()
   async handle(): Promise<number> {

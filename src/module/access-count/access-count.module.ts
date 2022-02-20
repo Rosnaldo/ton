@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common'
-import { AccessCountIncrementController } from './controller/increment.controller'
+import { AccessCountGetVisitsController } from './controller/get-visits.controller'
 import { CountApiGetVisitsService } from './service/count-api'
 
 @Module({
   imports: [],
   providers: [CountApiGetVisitsService],
-  controllers: [AccessCountIncrementController],
+  controllers: [AccessCountGetVisitsController],
   exports: [],
 })
 export class AccessCountModule {}
