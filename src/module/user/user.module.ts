@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
+import { CreateHash } from 'src/util/bcrypt'
 import { UserCreateController } from './controller/create.controller'
 import { UserFindOneController } from './controller/find-one.controller'
 import { UserCreateRepository } from './repository/create.repostiory'
@@ -10,7 +11,7 @@ export const UserMongooseModule = MongooseModule.forFeature([{ name: 'User', sch
 
 @Module({
   imports: [UserMongooseModule],
-  providers: [UserFindOneRepository, UserCreateRepository],
+  providers: [UserFindOneRepository, UserCreateRepository, CreateHash],
   controllers: [UserFindOneController, UserCreateController],
   exports: [],
 })
