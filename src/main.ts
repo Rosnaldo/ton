@@ -35,13 +35,12 @@ async function bootstrap() {
     },
   })
 
-  app.setGlobalPrefix('v2')
+  app.setGlobalPrefix('v1')
 
   const swagger = new DocumentBuilder()
     .setTitle(process.env.npm_package_name)
     .setDescription(process.env.npm_package_description)
     .setVersion(process.env.npm_package_version)
-    .addBearerAuth()
     .build()
   const document = SwaggerModule.createDocument(app, swagger)
   SwaggerModule.setup('docs', app, document)
