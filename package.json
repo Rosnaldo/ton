@@ -1,8 +1,8 @@
 {
-  "name": "challenges-api",
+  "name": "ton-api",
   "private": true,
   "version": "0.0.1",
-  "description": "Coodesh Challenges API",
+  "description": "Ton Challenge API",
   "license": "MIT",
   "engines": {
     "node": "14.18.2",
