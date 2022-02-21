@@ -2,11 +2,11 @@ import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify
 import { Test } from '@nestjs/testing'
 import { MongooseModule } from '@nestjs/mongoose'
 import * as timekeeper from 'timekeeper'
-import { LoadSeed } from 'src/util/load-seed'
+import { LoadSeed } from 'test/util/load-seed'
 import { UserMongooseModule } from 'src/module/user/user.module'
 import { UserCreateController } from 'src/module/user/controller/create.controller'
 import { UserCreateRepository } from 'src/module/user/repository/create.repostiory'
-import { MakeMockUser } from 'src/module/user/mock/user'
+import { MakeMockUser } from 'test/module/user/mock/user'
 import { CreateHash } from 'src/util/bcrypt'
 
 let app: NestFastifyApplication

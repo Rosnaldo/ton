@@ -1,5 +1,5 @@
 import { Types } from 'mongoose'
-import { IUser } from '../interface/user'
+import { IUser } from 'src/module/user/interface/user'
 
 const ObjectId = Types.ObjectId
 

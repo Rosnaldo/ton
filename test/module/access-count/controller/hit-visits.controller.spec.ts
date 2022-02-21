@@ -1,22 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { Logger } from '@nestjs/common'
-import { AccessCountGetVisitsController } from '../get-visits.controller'
-import { CountApiVisitsService } from '../../service/count-api'
+import { CountApiVisitsService } from 'src/module/access-count/service/count-api'
+import { AccessCountHitVisitsController } from 'src/module/access-count/controller/hit-visits.controller'
 
 let controller
 const mockCountApiVisitsService = {
-  get: jest.fn(),
+  hit: jest.fn(),
 }
 
 const Sut = () => {
-  const spy = jest.spyOn(mockCountApiVisitsService, 'get').mockResolvedValueOnce({ value: 1 })
+  const spy = jest.spyOn(mockCountApiVisitsService, 'hit')
   return { spy }
 }
 
-describe('AccessCountGetVisitsController', () => {
+describe('AccessCountHitVisitsController', () => {
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [AccessCountGetVisitsController],
+      controllers: [AccessCountHitVisitsController],
       providers: [CountApiVisitsService],
     })
       .setLogger(new Logger())
@@ -24,7 +24,7 @@ describe('AccessCountGetVisitsController', () => {
       .useValue(mockCountApiVisitsService)
       .compile()
 
-    controller = module.get<AccessCountGetVisitsController>(AccessCountGetVisitsController)
+    controller = module.get<AccessCountHitVisitsController>(AccessCountHitVisitsController)
   })
 
   afterEach(() => {
@@ -35,7 +35,7 @@ describe('AccessCountGetVisitsController', () => {
     expect(controller).toBeDefined()
   })
 
-  it('Should call CountApiVisitsService.get to be called', async function () {
+  it('Should call CountApiVisitsService.hit to be called', async function () {
     const { spy } = Sut()
 
     await controller.handle()

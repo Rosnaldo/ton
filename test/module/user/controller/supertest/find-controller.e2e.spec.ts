@@ -1,7 +1,7 @@
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify'
 import { Test } from '@nestjs/testing'
 import { MongooseModule } from '@nestjs/mongoose'
-import { LoadSeed } from 'src/util/load-seed'
+import { LoadSeed } from 'test/util/load-seed'
 import { UserFindOneController } from 'src/module/user/controller/find-one.controller'
 import { UserMongooseModule } from 'src/module/user/user.module'
 import { UserFindOneRepository } from 'src/module/user/repository/find-one.repostiory'

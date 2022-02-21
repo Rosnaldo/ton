@@ -17,7 +17,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./src/test/jest-e2e.json",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -40,8 +40,6 @@
     "fastify-helmet": "^5.3.2",
     "fastify-swagger": "^4.13.0",
     "lodash": "^4.17.21",
-    "mongo-seeding": "^3.7.1",
-    "mongodb-memory-server": "^8.2.0",
     "mongoose": "^5.13.14",
     "nestjs-pino": "^2.4.0",
     "pino-http": "^6.5.0",
@@ -67,6 +65,8 @@
     "husky": "^7.0.4",
     "jest": "^27.3.0",
     "lint-staged": "^10.2.11",
+    "mongo-seeding": "^3.7.1",
+    "mongodb-memory-server": "^8.4.0",
     "prettier": "^2.4.1",
     "pretty-quick": "^2.0.1",
     "run-script-webpack-plugin": "0.0.11",
@@ -89,7 +89,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "src/(.*)$": "<rootDir>/src/$1"
+      "src/(.*)$": "<rootDir>/src/$1",
+      "test/(.*)$": "<rootDir>/test/$1"
     },
     "moduleFileExtensions": [
       "js",

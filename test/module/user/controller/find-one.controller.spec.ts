@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { BadRequestException, Logger } from '@nestjs/common'
-import { UserFindOneController } from '../find-one.controller'
-import { UserFindOneRepository } from '../../repository/find-one.repostiory'
-import { IUser } from '../../interface/user'
-import { MakeMockUser } from '../../mock/user'
+import { UserFindOneController } from 'src/module/user/controller/find-one.controller'
+import { UserFindOneRepository } from 'src/module/user/repository/find-one.repostiory'
+import { IUser } from 'src/module/user/interface/user'
+import { MakeMockUser } from 'test/module/user/mock/user'
 
 let controller
 const mockUserFindOneRepository = {

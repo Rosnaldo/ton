@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt'
-import { CreateHash } from '../bcrypt'
+import { CreateHash } from 'src/util/bcrypt'
 
 const spy = jest.spyOn(bcrypt, 'hash')
 

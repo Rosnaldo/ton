@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { Logger } from '@nestjs/common'
-import { UserCreateController } from '../create.controller'
-import { UserCreateRepository } from '../../repository/create.repostiory'
-import { MakeMockUser } from '../../mock/user'
+import { UserCreateController } from 'src/module/user/controller/create.controller'
+import { UserCreateRepository } from 'src/module/user/repository/create.repostiory'
+import { MakeMockUser } from 'test/module/user/mock/user'
 import { CreateHash } from 'src/util/bcrypt'
 
 let controller
