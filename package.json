@@ -4,10 +4,6 @@
   "version": "0.0.1",
   "description": "Ton Challenge API",
   "license": "MIT",
-  "engines": {
-    "node": "14.18.2",
-    "npm": "6.14.15"
-  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
