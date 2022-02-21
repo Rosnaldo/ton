@@ -1,7 +1,0 @@
-apps:
-  - name: ton
-    script: node ./dist/main.js
-    watch: false
-    exec_mode: cluster
-    instances: 2
-    max_memory_restart: 200M
