@@ -8,6 +8,7 @@ import { UserCreateController } from 'src/module/user/controller/create.controll
 import { UserCreateRepository } from 'src/module/user/repository/create.repostiory'
 import { MakeMockUser } from 'test/module/user/mock/user'
 import { CreateHash } from 'src/util/bcrypt'
+import { UserCreateUseCase } from 'src/module/user/use-case/create.use-case'
 
 let app: NestFastifyApplication
 let replSet: any
@@ -39,7 +40,7 @@ describe('UserCreateController', () => {
         UserMongooseModule,
       ],
       controllers: [UserCreateController],
-      providers: [UserCreateRepository, CreateHash],
+      providers: [UserCreateRepository, CreateHash, UserCreateUseCase],
     })
       .overrideProvider(CreateHash)
       .useValue(mockCreateHash)

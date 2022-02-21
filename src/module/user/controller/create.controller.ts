@@ -1,19 +1,17 @@
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
-import { CreateHash } from 'src/util/bcrypt'
-import { CreateUserDto } from '../dto/create.dto'
-import { IUser } from '../interface/user'
-import { UserCreateRepository } from '../repository/create.repostiory'
+import { CreateUserDto } from 'src/module/user/dto/create.dto'
+import { IUser } from 'src/module/user/interface/user'
+import { UserCreateUseCase } from 'src/module/user/use-case/create.use-case'
 
 @ApiTags('users')
 @Controller('users')
 export class UserCreateController {
-  constructor(private readonly userCreateRepository: UserCreateRepository, private readonly createHash: CreateHash) {}
+  constructor(private readonly userCreateUseCase: UserCreateUseCase) {}
 
   @Post()
   @UsePipes(ValidationPipe)
   async handle(@Body() createUserDto: CreateUserDto): Promise<IUser> {
-    createUserDto.password = await this.createHash.execute(createUserDto.password)
-    return this.userCreateRepository.execute(createUserDto)
+    return this.userCreateUseCase.execute(createUserDto)
   }
 }

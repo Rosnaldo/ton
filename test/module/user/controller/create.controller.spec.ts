@@ -1,21 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { Logger } from '@nestjs/common'
 import { UserCreateController } from 'src/module/user/controller/create.controller'
-import { UserCreateRepository } from 'src/module/user/repository/create.repostiory'
 import { MakeMockUser } from 'test/module/user/mock/user'
-import { CreateHash } from 'src/util/bcrypt'
+import { UserCreateUseCase } from 'src/module/user/use-case/create.use-case'
 
 let controller
-const mockUserCreateRepository = {
-  execute: jest.fn(),
-}
-const mockCreateHash = {
+const mockUserCreateUseCase = {
   execute: jest.fn(),
 }
 
 const Sut = () => {
-  const spy = jest.spyOn(mockUserCreateRepository, 'execute')
-  jest.spyOn(mockCreateHash, 'execute').mockResolvedValueOnce('encrypted')
+  const spy = jest.spyOn(mockUserCreateUseCase, 'execute')
   return { spy }
 }
 
@@ -23,13 +18,11 @@ describe('UserCreateController', () => {
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UserCreateController],
-      providers: [UserCreateRepository, CreateHash],
+      providers: [UserCreateUseCase],
     })
       .setLogger(new Logger())
-      .overrideProvider(UserCreateRepository)
-      .useValue(mockUserCreateRepository)
-      .overrideProvider(CreateHash)
-      .useValue(mockCreateHash)
+      .overrideProvider(UserCreateUseCase)
+      .useValue(mockUserCreateUseCase)
       .compile()
 
     controller = module.get<UserCreateController>(UserCreateController)
@@ -45,10 +38,9 @@ describe('UserCreateController', () => {
 
   it('Should call UserCreateRepository with right param', async function () {
     const mockUser = MakeMockUser()
-    const expeted = { ...mockUser, password: 'encrypted' }
     const { spy } = Sut()
 
     await controller.handle(mockUser)
-    expect(spy).toBeCalledWith(expeted)
+    expect(spy).toBeCalledWith(mockUser)
   })
 })
