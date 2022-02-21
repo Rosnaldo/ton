@@ -1,6 +1,6 @@
 apps:
   - name: ton
-    script: ./dist/main.js
+    script: node ./dist/main.js
     watch: false
     exec_mode: cluster
     instances: 2

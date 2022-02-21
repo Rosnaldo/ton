@@ -1,1 +1,1 @@
-web: node ./dist/main.js
+web: pm2-runtime start ecosystem.config.yml
