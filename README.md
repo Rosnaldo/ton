@@ -26,3 +26,6 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Deploy
+https://ton-7653.herokuapp.com/docs
