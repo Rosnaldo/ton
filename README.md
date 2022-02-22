@@ -8,6 +8,7 @@ As exceptions estão sendo tratados por um catch global. Erros do tipo <strong>H
 As configurações do webpack foram sugeridas pela propria documentação do Nestjs para ativar o modo <strong>(Hot-Module Replacement)</strong> permitindo rápido recarremento durante o desenvolvimento.<br>
 O projeto está hostado pelo <strong>Heruko</strong>.<br>
 O <strong>helmet</strong> intercepta os endpoints globalmente e traz medidas de segurança configuradas por default.
+O <strong>Throttler</strong> protege contra ataques de massificação de requisições e individualiza por ip.
 
 ## Installation
 
