@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { LoggerModule } from 'nestjs-pino'
 import { MongooseModule } from '@nestjs/mongoose'
 import { ThrottlerModule } from '@nestjs/throttler'
+import { SentryModule } from '@ntegral/nestjs-sentry'
 
 import databaseConfig from './config/database.config'
 import local from './config/local.config'
@@ -34,6 +35,16 @@ import { AccessCountModule } from './module/access-count/access-count.module'
         useUnifiedTopology: true,
         useFindAndModify: false,
         useCreateIndex: true,
+      }),
+      inject: [ConfigService],
+    }),
+    SentryModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (config: ConfigService) => ({
+        dsn: config.get('sentry.dsn'),
+        debug: process.env.NODE_ENV !== 'production',
+        enabled: ['production', 'development'].includes(process.env.NODE_ENV),
+        environment: process.env.NODE_ENV,
       }),
       inject: [ConfigService],
     }),
