@@ -49,5 +49,12 @@ $ npm run test:cov
 $ docker-compose up
 ```
 
+## Serveless offline
+
+```bash
+# serveless
+$ sls offline
+```
+
 ## Deploy
 https://ton-7653.herokuapp.com/docs
