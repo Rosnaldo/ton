@@ -12,7 +12,7 @@ O projeto está hostado pelo <strong>Heruko</strong>.<br>
 Em questões de segurança estão configurados o cors,o helmet e o throttler. <br>
 O <strong>helmet</strong> intercepta os endpoints globalmente e traz medidas de segurança configuradas por default. <br>
 O <strong>Throttler</strong> protege contra ataques de massificação de requisições e individualiza por ip. <br>
-O cors não possui restrições.
+O <strong>cors</strong> não possui restrições. <br>
 No começo eu usei o <strong>fastify</strong> por questões de velocidade. Porém para implementar o serverless tive que retirar pois as bibliotecas adaptadoras estão com o suporte desatualizados. <br>
 O serverless roda bem no modo offline.
 
