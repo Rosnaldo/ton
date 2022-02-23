@@ -9,11 +9,11 @@ Cenários de erros customizados que não são do tipo <strong>HttpException</str
 O <strong>Sentry</strong> monitora os erros que eventualmente estourem em produção.<br>
 As configurações do webpack foram sugeridas pela propria documentação do Nestjs para ativar o modo <strong>(Hot-Module Replacement)</strong> permitindo rápido recarremento durante o desenvolvimento.<br>
 O projeto está hostado pelo <strong>Heruko</strong>.<br>
-Em questões de segurança estão configurados o cors,o helmet e o throttler.
-O <strong>helmet</strong> intercepta os endpoints globalmente e traz medidas de segurança configuradas por default.
-O <strong>Throttler</strong> protege contra ataques de massificação de requisições e individualiza por ip.
+Em questões de segurança estão configurados o cors,o helmet e o throttler. <br>
+O <strong>helmet</strong> intercepta os endpoints globalmente e traz medidas de segurança configuradas por default. <br>
+O <strong>Throttler</strong> protege contra ataques de massificação de requisições e individualiza por ip. <br>
 O cors não possui restrições.
-No começo eu usei o <strong>fastify</strong> por questões de velocidade. Porém para implementar o serverless tive que retirar pois as bibliotecas adaptadoras estão com o suporte desatualizados.
+No começo eu usei o <strong>fastify</strong> por questões de velocidade. Porém para implementar o serverless tive que retirar pois as bibliotecas adaptadoras estão com o suporte desatualizados. <br>
 O serverless roda bem no modo offline.
 
 ## Installation
