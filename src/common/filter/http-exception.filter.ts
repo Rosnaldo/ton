@@ -1,5 +1,4 @@
-import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common'
-import { SentryService } from '@ntegral/nestjs-sentry'
+import { ExceptionFilter, Catch, ArgumentsHost, HttpException } from '@nestjs/common'
 import { Response } from 'express'
 
 interface HttpExceptionResponse {
@@ -8,24 +7,13 @@ interface HttpExceptionResponse {
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-  constructor(private readonly sentry: SentryService) {}
-
-  catch(exception: unknown, host: ArgumentsHost) {
+  catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp()
     const response = ctx.getResponse<Response>()
 
-    let status: HttpStatus
-    let errorMessage: string
-
-    if (exception instanceof HttpException) {
-      status = exception.getStatus()
-      const errorResponse = exception.getResponse()
-      errorMessage = (errorResponse as HttpExceptionResponse).message || exception.message
-    } else {
-      status = HttpStatus.INTERNAL_SERVER_ERROR
-      errorMessage = 'Interno error'
-      this.sentry.instance().captureException(exception)
-    }
+    const status = exception.getStatus()
+    const errorResponse = exception.getResponse()
+    const errorMessage = (errorResponse as HttpExceptionResponse).message || exception.message
 
     response.status(status).send({
       error: errorMessage,

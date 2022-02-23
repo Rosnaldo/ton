@@ -4,6 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { SentryService } from '@ntegral/nestjs-sentry'
 import helmet from 'helmet'
 import { AppModule } from './app.module'
+import { AllExceptionsFilter } from './common/filter/all-exceptions-filter'
 import { HttpExceptionFilter } from './common/filter/http-exception.filter'
 
 declare const module: any
@@ -14,8 +15,8 @@ async function bootstrap() {
 
   app.useLogger(SentryService.SentryServiceInstance())
 
-  app.useGlobalFilters(new HttpExceptionFilter(new SentryService()))
-
+  app.useGlobalFilters(new AllExceptionsFilter(new SentryService()))
+  app.useGlobalFilters(new HttpExceptionFilter())
   app.enableCors()
 
   app.use(helmet())
