@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcryptjs'
 
 export class CreateHash {
   async execute(string: string): Promise<string> {

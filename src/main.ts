@@ -1,22 +1,15 @@
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
-import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { SentryService } from '@ntegral/nestjs-sentry'
-import compression from 'fastify-compress'
-import fastifyHelmet from 'fastify-helmet'
+import helmet from 'helmet'
 import { AppModule } from './app.module'
 import { HttpExceptionFilter } from './common/filter/http-exception.filter'
 
 declare const module: any
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter({
-      logger: true,
-    })
-  )
+  const app = await NestFactory.create(AppModule)
   const config = app.get<ConfigService>(ConfigService)
 
   app.useLogger(SentryService.SentryServiceInstance())
@@ -25,18 +18,7 @@ async function bootstrap() {
 
   app.enableCors()
 
-  await app.register(compression)
-  await app.register(fastifyHelmet, {
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: [`'self'`],
-        styleSrc: [`'self'`, `'unsafe-inline'`, 'cdn.jsdelivr.net', 'fonts.googleapis.com'],
-        fontSrc: [`'self'`, 'fonts.gstatic.com'],
-        imgSrc: [`'self'`, 'data:', 'cdn.jsdelivr.net'],
-        scriptSrc: [`'self'`, `https: 'unsafe-inline'`, `cdn.jsdelivr.net`],
-      },
-    },
-  })
+  app.use(helmet())
 
   app.setGlobalPrefix('v1')
 

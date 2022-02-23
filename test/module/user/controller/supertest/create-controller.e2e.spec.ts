@@ -1,7 +1,7 @@
-import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify'
 import { Test } from '@nestjs/testing'
 import { MongooseModule } from '@nestjs/mongoose'
 import * as timekeeper from 'timekeeper'
+import request from 'supertest'
 import { LoadSeed } from 'test/util/load-seed'
 import { UserMongooseModule } from 'src/module/user/user.module'
 import { UserCreateController } from 'src/module/user/controller/create.controller'
@@ -10,7 +10,7 @@ import { MakeMockUser } from 'test/module/user/mock/user'
 import { CreateHash } from 'src/util/bcrypt'
 import { UserCreateUseCase } from 'src/module/user/use-case/create.use-case'
 
-let app: NestFastifyApplication
+let app: any
 let replSet: any
 
 const mockCreateHash = {
@@ -45,10 +45,9 @@ describe('UserCreateController', () => {
       .overrideProvider(CreateHash)
       .useValue(mockCreateHash)
       .compile()
-    app = moduleRef.createNestApplication<NestFastifyApplication>(new FastifyAdapter())
+    app = moduleRef.createNestApplication()
 
-    await app.init()
-    await app.getHttpAdapter().getInstance().ready()
+    app = await moduleRef.createNestApplication().init()
   })
 
   afterAll(async () => {
@@ -59,15 +58,13 @@ describe('UserCreateController', () => {
 
   it(`/POST user`, () => {
     Sut()
-    return app
-      .inject({
-        method: 'POST',
-        url: '/users',
-        payload: MakeMockUser(),
-      })
+
+    return request(app.getHttpServer())
+      .post('/users')
+      .send(MakeMockUser())
       .then((result) => {
-        expect(result.statusCode).toEqual(201)
-        expect(result.payload).toMatchSnapshot()
+        expect(result.status).toEqual(201)
+        expect(result.text).toMatchSnapshot()
       })
   })
 })

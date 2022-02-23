@@ -1,12 +1,12 @@
-import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify'
 import { Test } from '@nestjs/testing'
 import { MongooseModule } from '@nestjs/mongoose'
+import request from 'supertest'
 import { LoadSeed } from 'test/util/load-seed'
 import { UserFindOneController } from 'src/module/user/controller/find-one.controller'
 import { UserMongooseModule } from 'src/module/user/user.module'
 import { UserFindOneRepository } from 'src/module/user/repository/find-one.repostiory'
 
-let app: NestFastifyApplication
+let app: any
 let replSet: any
 
 describe('UserFindOneController', () => {
@@ -29,10 +29,7 @@ describe('UserFindOneController', () => {
       controllers: [UserFindOneController],
       providers: [UserFindOneRepository],
     }).compile()
-    app = moduleRef.createNestApplication<NestFastifyApplication>(new FastifyAdapter())
-
-    await app.init()
-    await app.getHttpAdapter().getInstance().ready()
+    app = await moduleRef.createNestApplication().init()
   })
 
   afterAll(async () => {
@@ -41,14 +38,11 @@ describe('UserFindOneController', () => {
   })
 
   it(`/GET user`, () => {
-    return app
-      .inject({
-        method: 'GET',
-        url: '/users/5ce5895fc312a6648e06d5f3',
-      })
+    return request(app.getHttpServer())
+      .get('/users/5ce5895fc312a6648e06d5f3')
       .then((result) => {
-        expect(result.statusCode).toEqual(200)
-        expect(result.payload).toMatchSnapshot()
+        expect(result.status).toEqual(200)
+        expect(result.text).toMatchSnapshot()
       })
   })
 })
