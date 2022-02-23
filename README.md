@@ -13,8 +13,8 @@ Em questões de segurança estão configurados o cors,o helmet e o throttler. <b
 O <strong>helmet</strong> intercepta os endpoints globalmente e traz medidas de segurança configuradas por default. <br>
 O <strong>Throttler</strong> protege contra ataques de massificação de requisições e individualiza por ip. <br>
 O <strong>cors</strong> não possui restrições. <br>
-No começo eu usei o <strong>fastify</strong> por questões de velocidade. Porém para implementar o <strong>serverless/strong> tive que retirar pois as bibliotecas adaptadoras estão com o suporte desatualizados. <br>
-  O <strong>serverless</strong> roda bem no modo offline.
+No começo eu usei o <strong>fastify</strong> por questões de velocidade. Porém para implementar o <strong>serverless</strong> tive que retirar pois as bibliotecas adaptadoras estão com o suporte desatualizados. <br>
+O <strong>serverless</strong> roda bem no modo offline.
 
 ## Installation
 
