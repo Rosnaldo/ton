@@ -4,6 +4,7 @@ import { LoggerModule } from 'nestjs-pino'
 import { MongooseModule } from '@nestjs/mongoose'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { SentryModule } from '@ntegral/nestjs-sentry'
+import { LogLevel } from '@sentry/types'
 
 import databaseConfig from './config/database.config'
 import local from './config/local.config'
@@ -45,6 +46,8 @@ import { AccessCountModule } from './module/access-count/access-count.module'
         debug: process.env.NODE_ENV !== 'production',
         enabled: ['production', 'development'].includes(process.env.NODE_ENV),
         environment: process.env.NODE_ENV,
+        release: '0.0.1',
+        logLevel: LogLevel.Debug,
       }),
       inject: [ConfigService],
     }),

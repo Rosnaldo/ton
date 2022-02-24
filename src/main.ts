@@ -5,7 +5,6 @@ import { SentryService } from '@ntegral/nestjs-sentry'
 import helmet from 'helmet'
 import { AppModule } from './app.module'
 import { AllExceptionsFilter } from './common/filter/all-exceptions-filter'
-import { HttpExceptionFilter } from './common/filter/http-exception.filter'
 
 declare const module: any
 
@@ -14,11 +13,8 @@ async function bootstrap() {
   const config = app.get<ConfigService>(ConfigService)
 
   app.useLogger(SentryService.SentryServiceInstance())
-
   app.useGlobalFilters(new AllExceptionsFilter(new SentryService()))
-  app.useGlobalFilters(new HttpExceptionFilter())
   app.enableCors()
-
   app.use(helmet())
 
   app.setGlobalPrefix('v1')

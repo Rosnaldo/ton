@@ -5,7 +5,6 @@ import { Handler, Context, Callback } from 'aws-lambda'
 import helmet from 'helmet'
 import { AppModule } from './app.module'
 import { AllExceptionsFilter } from './common/filter/all-exceptions-filter'
-import { HttpExceptionFilter } from './common/filter/http-exception.filter'
 
 let server: Handler
 
@@ -13,9 +12,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
   app.useGlobalFilters(new AllExceptionsFilter(new SentryService()))
-  app.useLogger(SentryService.SentryServiceInstance())
-
-  app.useGlobalFilters(new HttpExceptionFilter())
 
   app.enableCors()
   app.use(helmet())
