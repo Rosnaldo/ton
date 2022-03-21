@@ -2,7 +2,7 @@
 
 
 ## Description
-O framework <strong>Nestjs</strong> foi escolhido por se tratar de uma pequena <strong>API Rest</strong>. Facilita bastante na construção de uma arquitetura limpa com injeções de dependencias, divisão de camadas <strong>(controller, use-case, service, repository)</strong> e isolamento de entidades. Além disso automatiza a construção do <strong>Aswagger</strong>A e isola sa bibliotecas com baixo acoplamento. As entidades estão com suas validações centralizadas <strong>(class-validator, mongoose, e swagger annotations).</strong> <br>
+O framework <strong>Nestjs</strong> foi escolhido por se tratar de uma pequena <strong>API Rest</strong>. Facilita bastante na construção de uma arquitetura limpa com injeções de dependencias, divisão de camadas <strong>(controller, use-case, service, repository)</strong> e isolamento de entidades. Além disso automatiza a construção do <strong>swagger</strong> e isola as bibliotecas com baixo acoplamento. As entidades estão com suas validações centralizadas <strong>(class-validator, mongoose, e swagger annotations).</strong> <br>
 Os testes estão isolados em uma pasta à parte para não atrapalharem no build do projeto. Os testes unitários não cobrem todo o projeto porém estão cobrindo os pontos mais críticos onde concentram as regras de negócio. Os testes de integração estão marcados com <strong>*.2e2.spec.ts</strong> e carregam arquivos <strong>*.json</strong> na pasta <strong>seeds</strong> mockando os dados.<br>
 As exceptions estão sendo tratados por um catchs globais e escopados. Erros do tipo <strong>HttpException</strong> retornam mensagens customizadas através dos endpoints.
 Cenários de erros customizados que não são do tipo <strong>HttpException</strong> são tradados por catch escopados.
